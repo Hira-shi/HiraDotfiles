@@ -4,17 +4,12 @@ set -euo pipefail
 ROOT="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 CONFIG_DIR="$HOME/.config"
 
-install_dir() {
-    local src="$1"
-    local dst="$2"
-
-    mkdir -p "$dst"
-
-    if command -v rsync >/dev/null 2>&1; then
-        rsync -a --delete "$src"/ "$dst"/
-    else
-        cp -a "$src"/. "$dst"/
-    fi
+# Create a timestamped backup of an existing path
+backup_path() {
+    local path="$1"
+    local stamp
+    stamp="$(date +%s)"
+    mv -- "$path" "${path}.backup.${stamp}"
 }
 
 for src in "$ROOT"/*; do
@@ -27,8 +22,28 @@ for src in "$ROOT"/*; do
     esac
 
     if [ -d "$src" ]; then
-        install_dir "$src" "$CONFIG_DIR/$name"
+        dst="$CONFIG_DIR/$name"
+
+        # If destination is a symlink
+        if [ -L "$dst" ]; then
+            # If it already points to the same source, skip
+            if [ "$(readlink -f -- "$dst")" = "$(readlink -f -- "$src")" ]; then
+                echo "Skipping $name: correct symlink exists at $dst"
+                continue
+            else
+                echo "Removing differing symlink at $dst"
+                rm -- "$dst"
+            fi
+        elif [ -e "$dst" ]; then
+            # If a file/dir exists, back it up
+            echo "Backing up existing $dst to ${dst}.backup"
+            backup_path "$dst"
+        fi
+
+        mkdir -p "$(dirname -- "$dst")"
+        ln -s -- "$src" "$dst"
+        echo "Linked $dst -> $src"
     fi
 done
 
-echo "Dotfiles installed from $ROOT"
+echo "Dotfiles linked from $ROOT"
