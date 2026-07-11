@@ -4,7 +4,6 @@
 
 -- Refer to https://wiki.hypr.land/Configuring/Variables/
 
--- https://wiki.hypr.land/Configuring/Variables/#general
 hl.config({
     general = {
         gaps_in = 4,
@@ -20,7 +19,6 @@ hl.config({
     },
 })
 
--- https://wiki.hypr.land/Configuring/Variables/#decoration
 hl.config({
     decoration = {
         rounding = 6,
@@ -42,7 +40,6 @@ hl.config({
     },
 })
 
--- https://wiki.hypr.land/Configuring/Variables/#animations
 hl.config({
     animations = {
         enabled = true,
@@ -82,21 +79,20 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "a
 -- hl.window_rule({ match = { floating = false }, border_size = 0, onworkspace = "f[1]" })
 -- hl.window_rule({ match = { floating = false }, rounding = 0, onworkspace = "f[1]" })
 
--- https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/
+-- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/
 hl.config({
     dwindle = {
         preserve_split = true,
     },
 })
 
--- https://wiki.hypr.land/Configuring/Layouts/Master-Layout/
+-- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/
 hl.config({
     master = {
         new_status = "master",
     },
 })
 
--- https://wiki.hypr.land/Configuring/Variables/#misc
 hl.config({
     misc = {
         force_default_wallpaper = -1,
