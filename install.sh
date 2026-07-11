@@ -103,33 +103,11 @@ link_dir() {
     echo "Linked $dst -> $src"
 }
 
-link_file() {
-    local src="$1"
-    local dst="$2"
-
-    if [ -L "$dst" ]; then
-        if [ "$(readlink -f -- "$dst")" = "$(readlink -f -- "$src")" ]; then
-            echo "Skipping $(basename "$src"): correct symlink exists at $dst"
-            return
-        else
-            echo "Removing differing symlink at $dst"
-            rm -- "$dst"
-        fi
-    elif [ -e "$dst" ]; then
-        echo "Backing up existing $dst to ${dst}.backup"
-        backup_path "$dst"
-    fi
-
-    mkdir -p "$(dirname -- "$dst")"
-    ln -s -- "$src" "$dst"
-    echo "Linked $dst -> $src"
-}
-
 if [ "$INSTALL_PACKAGES" = true ]; then
     install_required_packages
 fi
 
-targets=(hypr kitty rofi wlogout)
+targets=(hypr kitty rofi wlogout waybar)
 
 for name in "${targets[@]}"; do
     src="$ROOT/$name"
@@ -141,27 +119,5 @@ for name in "${targets[@]}"; do
         echo "Warning: source folder not found, skipping: $src"
     fi
 done
-
-# Waybar: create ~/.config/waybar first, then link config files from this repo
-waybar_src_dir="$ROOT/waybar"
-waybar_dst_dir="$CONFIG_DIR/waybar"
-
-if [ -d "$waybar_src_dir" ]; then
-    mkdir -p "$waybar_dst_dir"
-
-    if [ -f "$waybar_src_dir/config.jsonc" ]; then
-        link_file "$waybar_src_dir/config.jsonc" "$waybar_dst_dir/config.jsonc"
-    fi
-
-    if [ -f "$waybar_src_dir/config" ]; then
-        link_file "$waybar_src_dir/config" "$waybar_dst_dir/config"
-    fi
-
-    if [ -f "$waybar_src_dir/style.css" ]; then
-        link_file "$waybar_src_dir/style.css" "$waybar_dst_dir/style.css"
-    fi
-else
-    echo "Warning: source folder not found, skipping: $waybar_src_dir"
-fi
 
 echo "Dotfiles linked from $ROOT"
