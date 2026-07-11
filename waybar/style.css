@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-  background: rgba(30, 30, 46, 0.92);
+  background: transparent;
   color: #cdd6f4;
 }
 
@@ -44,6 +44,8 @@ window#waybar {
 }
 
 #clock,
+#custom-linux-version,
+#custom-vscode,
 #battery,
 #network,
 #custom-sound,
@@ -52,7 +54,7 @@ window#waybar {
 #tray {
   padding: 0 12px;
   margin: 0 4px;
-  background: rgba(255, 255, 255, 0.05);
+  background: transparent;
   color: #cdd6f4;
 }
 
@@ -62,7 +64,12 @@ window#waybar {
 }
 
 #custom-sound:hover,
+#custom-vscode:hover,
 #custom-nmtui:hover,
 #custom-wlogout:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#custom-vscode {
+  color: #89b4fa;
 }

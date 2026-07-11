@@ -2,12 +2,25 @@
   "layer": "top",
   "position": "top",
   "height": 30,
-  "modules-left": ["hyprland/workspaces"],
+  "modules-left": ["hyprland/workspaces", "custom/linux-version", "custom/vscode"],
   "modules-center": ["clock"],
   "modules-right": ["tray", "battery", "network", "custom/sound", "custom/nmtui", "custom/wlogout"],
 
   "hyprland/workspaces": {
     "format": "{name}"
+  },
+
+  "custom/vscode": {
+    "format": "󰨞",
+    "tooltip": false,
+    "on-click": "code"
+  },
+
+  "custom/linux-version": {
+    "exec": "uname -r",
+    "interval": 600,
+    "format": "󰌽 {}",
+    "tooltip": false
   },
 
   "clock": {

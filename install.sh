@@ -49,30 +49,53 @@ install_required_packages() {
     local runner
     runner="$(ensure_privilege_cmd)"
 
+    local pkgs=(hyprland kitty rofi waybar wlogout pavucontrol pamixer)
+
     if command -v pacman >/dev/null 2>&1; then
-        # Core apps requested for the setup.
-        local pkgs=(kitty rofi waybar wlogout pavucontrol pamixer)
-        if [ -n "$runner" ]; then
-            $runner pacman -S --needed --noconfirm "${pkgs[@]}"
-        else
-            pacman -S --needed --noconfirm "${pkgs[@]}"
-        fi
+        local pkg
+        for pkg in "${pkgs[@]}"; do
+            if [ -n "$runner" ]; then
+                if ! $runner pacman -S --needed --noconfirm "$pkg"; then
+                    echo "Warning: could not install $pkg with pacman; continuing." >&2
+                fi
+            else
+                if ! pacman -S --needed --noconfirm "$pkg"; then
+                    echo "Warning: could not install $pkg with pacman; continuing." >&2
+                fi
+            fi
+        done
     elif command -v apt-get >/dev/null 2>&1; then
-        local pkgs=(kitty rofi waybar wlogout pavucontrol pamixer)
         if [ -n "$runner" ]; then
             $runner apt-get update
-            $runner apt-get install -y "${pkgs[@]}"
         else
             apt-get update
-            apt-get install -y "${pkgs[@]}"
         fi
+
+        local pkg
+        for pkg in "${pkgs[@]}"; do
+            if [ -n "$runner" ]; then
+                if ! $runner apt-get install -y "$pkg"; then
+                    echo "Warning: could not install $pkg with apt-get; continuing." >&2
+                fi
+            else
+                if ! apt-get install -y "$pkg"; then
+                    echo "Warning: could not install $pkg with apt-get; continuing." >&2
+                fi
+            fi
+        done
     elif command -v dnf >/dev/null 2>&1; then
-        local pkgs=(kitty rofi waybar wlogout pavucontrol pamixer)
-        if [ -n "$runner" ]; then
-            $runner dnf install -y "${pkgs[@]}"
-        else
-            dnf install -y "${pkgs[@]}"
-        fi
+        local pkg
+        for pkg in "${pkgs[@]}"; do
+            if [ -n "$runner" ]; then
+                if ! $runner dnf install -y "$pkg"; then
+                    echo "Warning: could not install $pkg with dnf; continuing." >&2
+                fi
+            else
+                if ! dnf install -y "$pkg"; then
+                    echo "Warning: could not install $pkg with dnf; continuing." >&2
+                fi
+            fi
+        done
     else
         echo "Warning: unsupported package manager. Skipping package installation."
     fi
@@ -103,21 +126,27 @@ link_dir() {
     echo "Linked $dst -> $src"
 }
 
+link_repo_configs() {
+    local src
+    for src in "$ROOT"/*; do
+        [ -e "$src" ] || continue
+
+        case "$(basename -- "$src")" in
+            install.sh|README.md)
+                continue
+                ;;
+        esac
+
+        if [ -d "$src" ]; then
+            link_dir "$src" "$CONFIG_DIR/$(basename -- "$src")"
+        fi
+    done
+}
+
 if [ "$INSTALL_PACKAGES" = true ]; then
     install_required_packages
 fi
 
-targets=(hypr kitty rofi wlogout waybar)
-
-for name in "${targets[@]}"; do
-    src="$ROOT/$name"
-    dst="$CONFIG_DIR/$name"
-
-    if [ -d "$src" ]; then
-        link_dir "$src" "$dst"
-    else
-        echo "Warning: source folder not found, skipping: $src"
-    fi
-done
+link_repo_configs
 
 echo "Dotfiles linked from $ROOT"
