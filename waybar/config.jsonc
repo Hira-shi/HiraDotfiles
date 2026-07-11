@@ -4,7 +4,11 @@
   "height": 30,
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "battery", "tray"],
+  "modules-right": ["tray", "battery", "network", "custom/sound", "custom/nmtui", "custom/wlogout"],
+
+  "hyprland/workspaces": {
+    "format": "{name}"
+  },
 
   "clock": {
     "format": "{:%H:%M}"
@@ -21,12 +25,25 @@
     "format-disconnected": "󰖪"
   },
 
-  "pulseaudio": {
-    "format": "{volume}% {icon}",
-    "format-muted": "󰝟",
-    "format-icons": {
-      "default": ["", "", ""]
-    }
+  "custom/sound": {
+    "format": "󰕾",
+    "tooltip": false,
+    "on-click": "pavucontrol",
+    "on-click-right": "pamixer -t",
+    "on-scroll-up": "pamixer -i 5",
+    "on-scroll-down": "pamixer -d 5"
+  },
+
+  "custom/nmtui": {
+    "format": "󰈀",
+    "tooltip": false,
+    "on-click": "kitty -e nmtui"
+  },
+
+  "custom/wlogout": {
+    "format": "⏻",
+    "tooltip": false,
+    "on-click": "wlogout"
   },
 
   "tray": {

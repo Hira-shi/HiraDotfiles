@@ -50,15 +50,15 @@ install_required_packages() {
     runner="$(ensure_privilege_cmd)"
 
     if command -v pacman >/dev/null 2>&1; then
-        # Hypr ecosystem tools, excluding hyprland itself.
-        local pkgs=(kitty rofi waybar wlogout hyprpaper hyprlock brightnessctl pamixer playerctl)
+        # Core apps requested for the setup.
+        local pkgs=(kitty rofi waybar wlogout pavucontrol pamixer)
         if [ -n "$runner" ]; then
             $runner pacman -S --needed --noconfirm "${pkgs[@]}"
         else
             pacman -S --needed --noconfirm "${pkgs[@]}"
         fi
     elif command -v apt-get >/dev/null 2>&1; then
-        local pkgs=(kitty rofi waybar wlogout brightnessctl playerctl)
+        local pkgs=(kitty rofi waybar wlogout pavucontrol pamixer)
         if [ -n "$runner" ]; then
             $runner apt-get update
             $runner apt-get install -y "${pkgs[@]}"
@@ -67,7 +67,7 @@ install_required_packages() {
             apt-get install -y "${pkgs[@]}"
         fi
     elif command -v dnf >/dev/null 2>&1; then
-        local pkgs=(kitty rofi waybar wlogout brightnessctl playerctl)
+        local pkgs=(kitty rofi waybar wlogout pavucontrol pamixer)
         if [ -n "$runner" ]; then
             $runner dnf install -y "${pkgs[@]}"
         else
