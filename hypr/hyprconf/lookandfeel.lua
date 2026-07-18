@@ -5,45 +5,45 @@
 -- Refer to https://wiki.hypr.land/Configuring/Variables/
 
 hl.config({
-    general = {
-        gaps_in = 4,
-        gaps_out = 10,
-        border_size = 0,
-        col = {
-            active_border = "rgba(33ccffee)",
-            inactive_border = "rgba(595959aa)",
-        },
-        resize_on_border = false,
-        allow_tearing = false,
-        layout = "dwindle",
-    },
+	general = {
+		gaps_in = 2,
+		gaps_out = 0,
+		border_size = 0,
+		col = {
+			active_border = "rgba(33ccffee)",
+			inactive_border = "rgba(595959aa)",
+		},
+		resize_on_border = false,
+		allow_tearing = false,
+		layout = "dwindle",
+	},
 })
 
 hl.config({
-    decoration = {
-        rounding = 6,
-        rounding_power = 3,
-        active_opacity = 0.9,
-        inactive_opacity = 1.0,
-        shadow = {
-            enabled = true,
-            range = 4,
-            render_power = 3,
-            color = "rgba(1a1a1aee)",
-        },
-        blur = {
-            enabled = true,
-            size = 5,
-            passes = 3,
-            vibrancy = 0.1696,
-        },
-    },
+	decoration = {
+		rounding = 0,
+		rounding_power = 0,
+		active_opacity = 1.0,
+		inactive_opacity = 1.0,
+		shadow = {
+			enabled = true,
+			range = 4,
+			render_power = 3,
+			color = "rgba(1a1a1aee)",
+		},
+		blur = {
+			enabled = true,
+			size = 5,
+			passes = 3,
+			vibrancy = 0.1696,
+		},
+	},
 })
 
 hl.config({
-    animations = {
-        enabled = true,
-    },
+	animations = {
+		enabled = true,
+	},
 })
 
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
@@ -81,21 +81,21 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "a
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/
 hl.config({
-    dwindle = {
-        preserve_split = true,
-    },
+	dwindle = {
+		preserve_split = true,
+	},
 })
 
 -- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/
 hl.config({
-    master = {
-        new_status = "master",
-    },
+	master = {
+		new_status = "master",
+	},
 })
 
 hl.config({
-    misc = {
-        force_default_wallpaper = -1,
-        disable_hyprland_logo = false,
-    },
+	misc = {
+		force_default_wallpaper = -1,
+		disable_hyprland_logo = false,
+	},
 })
