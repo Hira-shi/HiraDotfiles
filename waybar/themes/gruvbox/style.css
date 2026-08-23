@@ -7,9 +7,9 @@
 }
 
 window#waybar {
-  background: rgba(24, 25, 38, 0.92);
-  color: #cdd6f4;
-  border: 1px solid #313244;
+  background: rgba(40, 40, 40, 0.92);
+  color: #ebdbb2;
+  border: 1px solid #504945;
 }
 
 #workspaces {
@@ -20,28 +20,28 @@ window#waybar {
   min-width: 24px;
   margin: 0 3px;
   padding: 0 8px;
-  border: 1px solid #313244;
+  border: 1px solid #504945;
   background: rgba(255, 255, 255, 0.04);
-  color: #cdd6f4;
+  color: #ebdbb2;
   box-shadow: none;
   transition: all 0.15s ease-in-out;
 }
 
 #workspaces button.active {
-  background: #89b4fa;
-  border-color: #89b4fa;
-  color: #1e1e2e;
+  background: #fe8019;
+  border-color: #fe8019;
+  color: #282828;
 }
 
 #workspaces button.urgent {
-  background: #f38ba8;
-  border-color: #f38ba8;
-  color: #1e1e2e;
+  background: #fb4934;
+  border-color: #fb4934;
+  color: #282828;
 }
 
 #workspaces button:hover {
-  background: rgba(137, 180, 250, 0.22);
-  border-color: #89b4fa;
+  background: rgba(254, 128, 25, 0.2);
+  border-color: #fe8019;
 }
 
 #clock,
@@ -54,13 +54,13 @@ window#waybar {
   padding: 0 12px;
   margin: 0 4px;
   background: transparent;
-  color: #cdd6f4;
+  color: #ebdbb2;
   border: none;
 }
 
 #custom-wlogout {
   background: transparent;
-  color: #f38ba8;
+  color: #fb4934;
 }
 
 #custom-sound:hover,

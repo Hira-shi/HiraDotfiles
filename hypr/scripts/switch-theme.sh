@@ -2,6 +2,7 @@
 
 THEME=$1
 VALID_THEMES=("catppuccin" "gruvbox" "tokyonight")
+REPO_ROOT="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 if [ -z "$THEME" ]; then
     echo "Usage: ./switch-theme.sh [catppuccin|gruvbox|tokyonight]"
@@ -34,6 +35,15 @@ cp ~/.config/hypr/themes/$THEME/hyprlock.conf ~/.config/hypr/hyprlock.conf
 
 # Change le fichier kitty
 cp ~/.config/hypr/themes/$THEME/kitty.conf ~/.config/kitty/kitty.conf
+
+# Change les fichiers Waybar du thème choisi
+cp "$REPO_ROOT/waybar/themes/$THEME/config.jsonc" ~/.config/waybar/config.jsonc
+cp "$REPO_ROOT/waybar/themes/$THEME/style.css" ~/.config/waybar/style.css
+
+# Redémarre Waybar pour appliquer le nouveau thème immédiatement
+killall waybar 2>/dev/null || true
+sleep 0.5
+waybar &
 
 # Recharge la configuration kitty pour toutes les instances ouvertes
 kill -USR1 $(pgrep kitty) 2>/dev/null || true
