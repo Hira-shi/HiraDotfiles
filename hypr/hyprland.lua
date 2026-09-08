@@ -11,19 +11,19 @@ package.path = package.path .. ";" .. config_dir .. "/?.lua;" .. config_dir .. "
 
 -- Main config
 hl.config({
-    misc = {
-        disable_hyprland_logo = true,
-        disable_splash_rendering = true,
-        background_color = "rgb(1e1e2e)",
-    },
+	misc = {
+		disable_hyprland_logo = true,
+		disable_splash_rendering = true,
+		background_color = "rgb(1e1e2e)",
+	},
 })
 
 -- Monitors
 hl.monitor({
-    output = "eDP-1",
-    mode = "1920x1080@60",
-    position = "0x0",
-    scale = "1",
+	output = "eDP-1",
+	mode = "1920x1080@60",
+	position = "0x0",
+	scale = "1",
 })
 
 -- Split configuration files

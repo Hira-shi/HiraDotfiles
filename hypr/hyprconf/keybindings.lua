@@ -28,15 +28,15 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("code /home/jer"))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("pkill rofi || " .. menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo()) -- dwindle
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("librewolf"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("kitty -e nmtui"))
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))
