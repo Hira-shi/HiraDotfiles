@@ -1,0 +1,103 @@
+/*
+ * Black Metal (khold) — true black
+ * bg #000000 | fg #c1c1c1 | muted #505050
+ * accents: #eceee3 (bone) · #974b46 (rust) · #5f8787 (frost)
+ */
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: JetBrainsMono Nerd Font, sans-serif;
+  font-size: 12px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: #000000;
+  color: #c1c1c1;
+  border-bottom: 1px solid #141414;
+}
+
+#workspaces {
+  padding: 0 6px;
+}
+
+#workspaces button {
+  min-width: 24px;
+  margin: 4px 3px;
+  padding: 0 8px;
+  border: 1px solid #141414;
+  background: #000000;
+  color: #505050;
+  box-shadow: none;
+  transition: all 0.15s ease-in-out;
+}
+
+#workspaces button.active {
+  background: #eceee3;
+  border-color: #eceee3;
+  color: #000000;
+}
+
+#workspaces button.urgent {
+  background: #974b46;
+  border-color: #974b46;
+  color: #000000;
+}
+
+#workspaces button:hover {
+  background: #0d0d0d;
+  border-color: #5f8787;
+  color: #c1c1c1;
+}
+
+#clock,
+#battery,
+#network,
+#custom-sound,
+#custom-nmtui,
+#custom-wlogout,
+#tray {
+  padding: 0 12px;
+  margin: 0 2px;
+  background: transparent;
+  color: #c1c1c1;
+  border: none;
+}
+
+#clock {
+  color: #eceee3;
+}
+
+#network {
+  color: #5f8787;
+}
+
+#battery {
+  color: #c1c1c1;
+}
+
+#battery.warning:not(.charging) {
+  color: #974b46;
+}
+
+#battery.critical:not(.charging) {
+  background: #974b46;
+  color: #000000;
+}
+
+#battery.charging {
+  color: #5f8787;
+}
+
+#custom-wlogout {
+  background: transparent;
+  color: #974b46;
+}
+
+#custom-sound:hover,
+#custom-nmtui:hover,
+#custom-wlogout:hover {
+  background: #0d0d0d;
+  color: #eceee3;
+}
