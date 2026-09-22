@@ -1,11 +1,11 @@
 #!/bin/bash
 
 THEME=$1
-VALID_THEMES=("catppuccin" "gruvbox" "tokyonight")
+VALID_THEMES=("catppuccin" "gruvbox" "tokyonight" "blackmetal")
 REPO_ROOT="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 if [ -z "$THEME" ]; then
-    echo "Usage: ./switch-theme.sh [catppuccin|gruvbox|tokyonight]"
+    echo "Usage: ./switch-theme.sh [catppuccin|gruvbox|tokyonight|blackmetal]"
     echo "Thèmes disponibles:"
     for t in "${VALID_THEMES[@]}"; do
         echo "  - $t"
@@ -58,6 +58,9 @@ case "$THEME" in
         ;;
     "tokyonight")
         sed -i 's/colorscheme = ".*"/colorscheme = "tokyonight"/' ~/.config/nvim/lua/plugins/colorscheme.lua
+        ;;
+    "blackmetal")
+        sed -i 's/colorscheme = ".*"/colorscheme = "carbonfox"/' ~/.config/nvim/lua/plugins/colorscheme.lua
         ;;
 esac
 
