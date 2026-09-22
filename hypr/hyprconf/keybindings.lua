@@ -38,6 +38,10 @@ hl.bind(mainMod .. " + SHIFT + L", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.focus({ direction = "down" }))
 
+-- Toggle special
+hl.bind(mainMod .. " + H", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"), { description = "Toggle split" })
+
 -- Switch workspaces with mainMod + [0-9]
 hl.bind(mainMod .. " + 1", hl.dsp.focus({ workspace = 1 }))
 hl.bind(mainMod .. " + 2", hl.dsp.focus({ workspace = 2 }))
