@@ -5,8 +5,8 @@
 -- https://wiki.hypr.land/Configuring/Variables/#input
 hl.config({
 	input = {
-		kb_layout = "us",
-		kb_variant = "",
+		kb_layout = "ch",
+		kb_variant = "fr",
 		kb_model = "",
 		kb_options = "",
 		kb_rules = "",
