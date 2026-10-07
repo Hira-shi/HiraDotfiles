@@ -7,10 +7,11 @@
 local terminal = "kitty"
 local fileManager = "nautilus"
 local menu = "~/.config/rofi/launchers/type-3/launcher.sh"
-local browser = "firefox"
-local browser1 = "zen-browser"
+local browser1 = "firefox"
+local browser = "zen-browser"
 local discord = "discord"
 local mainMod = "SUPER"
+local tmog = "tmog-task-manager"
 
 --###################
 --### KEYBINDINGS ###
@@ -31,6 +32,7 @@ hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("librewolf"))
 hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("kitty -e nmtui"))
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(tmog))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.focus({ direction = "left" }))

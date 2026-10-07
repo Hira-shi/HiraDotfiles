@@ -1,0 +1,27 @@
+[General]
+# Overrides for Sugar Candy (read by SDDM on top of theme.conf)
+
+Background="Backgrounds/prana-classroom.png"
+ScaleImageCropped="true"
+ScreenWidth="1920"
+ScreenHeight="1080"
+
+FullBlur="false"
+PartialBlur="true"
+BlurRadius="80"
+HaveFormBackground="true"
+FormPosition="left"
+
+# Palette taken from the GRUB prana classroom theme
+MainColor="#172d5a"
+AccentColor="#e8578f"
+BackgroundColor="#f4f8fc"
+OverrideLoginButtonTextColor="#ffffff"
+InterfaceShadowOpacity="0.3"
+RoundCorners="14"
+ForceHideVirtualKeyboardButton="true"
+
+Font="Noto Sans"
+HourFormat="HH:mm"
+DateFormat="dddd d MMMM"
+HeaderText="きっと、どこかで。"

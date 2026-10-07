@@ -132,7 +132,7 @@ link_repo_configs() {
     [ -e "$src" ] || continue
 
     case "$(basename -- "$src")" in
-    install.sh | README.md)
+    install.sh | README.md | sddm)
       continue
       ;;
     esac
