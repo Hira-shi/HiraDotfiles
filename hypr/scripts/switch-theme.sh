@@ -36,9 +36,12 @@ cp ~/.config/hypr/themes/$THEME/hyprlock.conf ~/.config/hypr/hyprlock.conf
 # Change le fichier kitty
 cp ~/.config/hypr/themes/$THEME/kitty.conf ~/.config/kitty/kitty.conf
 
-# Change les fichiers Waybar du thème choisi
-cp "$REPO_ROOT/waybar/themes/$THEME/config.jsonc" ~/.config/waybar/config.jsonc
-cp "$REPO_ROOT/waybar/themes/$THEME/style.css" ~/.config/waybar/style.css
+# Change la palette Waybar (style.css l'importe) et les couleurs des <span> de config.jsonc
+WAYBAR_COLORS="$REPO_ROOT/waybar/themes/$THEME/colors.css"
+cp "$WAYBAR_COLORS" ~/.config/waybar/colors.css
+ACCENT=$(sed -n 's/^@define-color accent \(#[0-9a-fA-F]\{6\}\);/\1/p' "$WAYBAR_COLORS")
+MUTED=$(sed -n 's/^@define-color muted \(#[0-9a-fA-F]\{6\}\);/\1/p' "$WAYBAR_COLORS")
+sed -i -E "s/foreground='#[0-9a-fA-F]{6}'/foreground='$ACCENT'/g; s/fgcolor='#[0-9a-fA-F]{6}'/fgcolor='$MUTED'/g" "$REPO_ROOT/waybar/config.jsonc"
 
 # Redémarre Waybar pour appliquer le nouveau thème immédiatement
 killall waybar 2>/dev/null || true
