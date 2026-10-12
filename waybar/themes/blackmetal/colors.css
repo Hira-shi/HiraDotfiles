@@ -1,0 +1,6 @@
+/* Palette Waybar du thème blackmetal (copiée dans waybar/colors.css par switch-theme.sh) */
+@define-color bg #000000;
+@define-color fg #c1c1c1;
+@define-color accent #974b46;
+@define-color alert #5f8787;
+@define-color muted #505050;

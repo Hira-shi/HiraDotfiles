@@ -1,0 +1,6 @@
+/* Palette Waybar du thème tokyonight (copiée dans waybar/colors.css par switch-theme.sh) */
+@define-color bg #1a1b26;
+@define-color fg #c0caf5;
+@define-color accent #7aa2f7;
+@define-color alert #f7768e;
+@define-color muted #565f89;
