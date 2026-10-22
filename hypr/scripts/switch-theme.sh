@@ -58,7 +58,7 @@ case "$THEME" in
     "kanagawa") NVIM_THEME="kanagawa-dragon" ;;
     "blackmetal") NVIM_THEME="yoru" ;;
 esac
-CHADRC="$REPO_ROOT/neovim/nvim/lua/chadrc.lua"
+CHADRC="$HOME/.config/nvim/lua/chadrc.lua"
 if [ -n "$NVIM_THEME" ] && [ -f "$CHADRC" ]; then
     sed -i "/^M.base46 = {/,/^}/ s/theme = \"[^\"]*\"/theme = \"$NVIM_THEME\"/" "$CHADRC"
     if command -v nvim >/dev/null 2>&1; then
