@@ -1,11 +1,11 @@
 #!/bin/bash
 
 THEME=$1
-VALID_THEMES=("catppuccin" "gruvbox" "tokyonight" "blackmetal")
+VALID_THEMES=("catppuccin" "gruvbox" "kanagawa" "blackmetal")
 REPO_ROOT="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 if [ -z "$THEME" ]; then
-    echo "Usage: ./switch-theme.sh [catppuccin|gruvbox|tokyonight|blackmetal]"
+    echo "Usage: ./switch-theme.sh [catppuccin|gruvbox|kanagawa|blackmetal]"
     echo "Thèmes disponibles:"
     for t in "${VALID_THEMES[@]}"; do
         echo "  - $t"
@@ -51,21 +51,27 @@ waybar &
 # Recharge la configuration kitty pour toutes les instances ouvertes
 kill -USR1 $(pgrep kitty) 2>/dev/null || true
 
-# Change le thème nvim selon le thème
+# Change le thème base46 de NvChad selon le thème
 case "$THEME" in
-    "catppuccin")
-        sed -i 's/colorscheme = ".*"/colorscheme = "catppuccin-mocha"/' ~/.config/nvim/lua/plugins/colorscheme.lua
-        ;;
-    "gruvbox")
-        sed -i 's/colorscheme = ".*"/colorscheme = "gruvbox"/' ~/.config/nvim/lua/plugins/colorscheme.lua
-        ;;
-    "tokyonight")
-        sed -i 's/colorscheme = ".*"/colorscheme = "tokyonight"/' ~/.config/nvim/lua/plugins/colorscheme.lua
-        ;;
-    "blackmetal")
-        sed -i 's/colorscheme = ".*"/colorscheme = "carbonfox"/' ~/.config/nvim/lua/plugins/colorscheme.lua
-        ;;
+    "catppuccin") NVIM_THEME="catppuccin" ;;
+    "gruvbox") NVIM_THEME="chocolate" ;;
+    "kanagawa") NVIM_THEME="kanagawa-dragon" ;;
+    "blackmetal") NVIM_THEME="yoru" ;;
 esac
+CHADRC="$REPO_ROOT/neovim/nvim/lua/chadrc.lua"
+if [ -n "$NVIM_THEME" ] && [ -f "$CHADRC" ]; then
+    sed -i "/^M.base46 = {/,/^}/ s/theme = \"[^\"]*\"/theme = \"$NVIM_THEME\"/" "$CHADRC"
+    if command -v nvim >/dev/null 2>&1; then
+        # base46 lit un cache compilé au démarrage : on le régénère
+        nvim --headless -c 'lua require("base46").load_all_highlights()' -c 'qa' >/dev/null 2>&1 || true
+        # et on recharge le thème dans les nvim déjà ouverts (un socket par instance)
+        for sock in "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"/nvim.*.0; do
+            [ -S "$sock" ] || continue
+            timeout 2 nvim --server "$sock" --remote-expr \
+                "luaeval('require(\"nvchad.themes.utils\").reload_theme(\"$NVIM_THEME\")')" >/dev/null 2>&1 || true
+        done
+    fi
+fi
 
 # Redémarre hyprpaper
 killall hyprpaper 2>/dev/null

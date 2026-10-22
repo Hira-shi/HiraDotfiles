@@ -105,5 +105,5 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 -- Raccourcis pour changer de thème
 hl.bind(mainMod .. " + ALT + 1", hl.dsp.exec_cmd("~/.config/hypr/scripts/switch-theme.sh catppuccin"))
 hl.bind(mainMod .. " + ALT + 2", hl.dsp.exec_cmd("~/.config/hypr/scripts/switch-theme.sh gruvbox"))
-hl.bind(mainMod .. " + ALT + 3", hl.dsp.exec_cmd("~/.config/hypr/scripts/switch-theme.sh tokyonight"))
+hl.bind(mainMod .. " + ALT + 3", hl.dsp.exec_cmd("~/.config/hypr/scripts/switch-theme.sh kanagawa"))
 hl.bind(mainMod .. " + ALT + 4", hl.dsp.exec_cmd("~/.config/hypr/scripts/switch-theme.sh blackmetal"))
