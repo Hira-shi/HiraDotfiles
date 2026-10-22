@@ -35,9 +35,9 @@ Hyprland (Lua config) · Waybar · Rofi · Kitty · wlogout · Hyprlock · SDDM 
 
 ### Themes
 
-| Catppuccin | Gruvbox | Tokyo Night | Black Metal |
+| Catppuccin | Gruvbox | Kanagawa Dragon | Black Metal |
 |:---:|:---:|:---:|:---:|
-| <img src="assets/screenshots/theme-catppuccin.png" alt="Catppuccin theme" width="100%"> | <img src="assets/screenshots/theme-gruvbox.png" alt="Gruvbox theme" width="100%"> | <img src="assets/screenshots/theme-tokyonight.png" alt="Tokyo Night theme" width="100%"> | <sub><i>screenshot coming soon</i></sub> |
+| <img src="assets/screenshots/theme-catppuccin.png" alt="Catppuccin theme" width="100%"> | <img src="assets/screenshots/theme-gruvbox.png" alt="Gruvbox theme" width="100%"> | <img src="assets/screenshots/theme-tokyonight.png" alt="Kanagawa Dragon theme" width="100%"> | <sub><i>screenshot coming soon</i></sub> |
 | `SUPER + ALT + 1` | `SUPER + ALT + 2` | `SUPER + ALT + 3` | `SUPER + ALT + 4` |
 
 ### Components
@@ -58,10 +58,10 @@ Hyprland (Lua config) · Waybar · Rofi · Kitty · wlogout · Hyprlock · SDDM 
 ## ✨ Features
 
 - **Hyprland configured in Lua** — the config is split into readable modules (`autostart`, `input`, `keybindings`, `lookandfeel`, `workspaces`, …) instead of one monolithic `hyprland.conf`.
-- **Four full desktop themes** — Catppuccin, Gruvbox, Tokyo Night and Black Metal, each covering Hyprland, Waybar, Kitty, Hyprlock, the wallpaper and Neovim.
+- **Four full desktop themes** — Catppuccin, Gruvbox, Kanagawa Dragon and Black Metal, each covering Hyprland, Waybar, Kitty, Hyprlock, the wallpaper and Neovim (NvChad).
 - **Instant theme switching** — one keybind swaps every app's colours and reloads Waybar, Kitty, hyprpaper and Hyprland live, no logout needed.
 - **Single Waybar layout, themed by palette** — one `config.jsonc` + `style.css` (based on [HANCORE waybar-themes](https://github.com/HANCORE-linux/waybar-themes)); each theme only ships a 5-colour `colors.css`.
-- **Blur & transparency** — 3-pass blur, dwindle layout, translucent Kitty on Catppuccin and Tokyo Night (`background_opacity 0.3`).
+- **Blur & transparency** — 3-pass blur, dwindle layout, translucent Kitty on Catppuccin and Kanagawa Dragon (`background_opacity 0.3`).
 - **A large Rofi collection** — 7 launcher types, 6 power-menu types, applets and 16 colour schemes.
 - **Safe installer** — `install.sh` symlinks the repo into `~/.config` and timestamps a backup of anything already there.
 - **Laptop-ready** — volume, mic, brightness and media keys bound out of the box.
@@ -78,6 +78,7 @@ Hyprland (Lua config) · Waybar · Rofi · Kitty · wlogout · Hyprlock · SDDM 
 | [Rofi](https://github.com/davatorium/rofi) | App launcher & power menu | `rofi/` |
 | [Kitty](https://sw.kovidgoyal.net/kitty/) | Terminal | `kitty/kitty.conf` |
 | [wlogout](https://github.com/ArtsyMacaw/wlogout) | Logout menu | `wlogout/` |
+| [Neovim](https://neovim.io) + [NvChad](https://nvchad.com) | Editor | `neovim/nvim/` (linked as `~/.config/nvim`) |
 | [Hyprlock](https://github.com/hyprwm/hyprlock) | Lock screen | `hypr/hyprlock.conf` |
 | [hyprpaper](https://github.com/hyprwm/hyprpaper) | Wallpaper daemon | `hypr/hyprpaper.conf` |
 | [SDDM](https://github.com/sddm/sddm) + [Sugar Candy](https://framagit.org/MarianArlt/sddm-sugar-candy) | Login screen (optional) | `sddm/` |
@@ -103,9 +104,11 @@ Already have the packages, or want to review them yourself? Skip installation an
 
 ### What the installer does
 
-1. Installs `hyprland`, `kitty`, `rofi`, `waybar`, `wlogout`, `pavucontrol` and `pamixer` (supports `pacman`, `apt-get` and `dnf`).
-2. Backs up any existing `~/.config/{hypr,waybar,rofi,kitty,wlogout}`.
-3. Symlinks each directory of this repo into `~/.config`, so edits to your clone apply immediately.
+1. Installs `hyprland`, `kitty`, `rofi`, `waybar`, `wlogout`, `pavucontrol`, `pamixer`, plus `neovim` and what NvChad needs (`git`, `ripgrep`, `gcc`, `make`, `tree-sitter-cli`, `unzip`) — supports `pacman`, `apt-get` and `dnf`.
+2. Backs up any existing `~/.config/{hypr,waybar,rofi,kitty,wlogout,nvim}`. When an existing Neovim config is replaced, `~/.local/share/nvim`, `~/.local/state/nvim` and `~/.cache/nvim` are backed up too, so old plugins don't clash with NvChad.
+3. Symlinks `hypr`, `waybar`, `rofi`, `kitty`, `wlogout` and `neovim/nvim` (as `nvim`) into `~/.config`, so edits to your clone apply immediately.
+
+On the first `nvim` launch NvChad installs its plugins; then run `:MasonInstallAll` to install the language servers and formatters (clangd, neocmake, pyright, rust-analyzer, jdtls, lua_ls, stylua, clang-format, ruff).
 
 ### Recommended extras
 
@@ -149,7 +152,7 @@ Four themes ship in `hypr/themes/`. Each one bundles a matching `lookandfeel.lua
 |---|---|---|
 | Catppuccin | `SUPER + ALT + 1` | `~/.config/hypr/scripts/switch-theme.sh catppuccin` |
 | Gruvbox | `SUPER + ALT + 2` | `~/.config/hypr/scripts/switch-theme.sh gruvbox` |
-| Tokyo Night | `SUPER + ALT + 3` | `~/.config/hypr/scripts/switch-theme.sh tokyonight` |
+| Kanagawa Dragon | `SUPER + ALT + 3` | `~/.config/hypr/scripts/switch-theme.sh kanagawa` |
 | Black Metal | `SUPER + ALT + 4` | `~/.config/hypr/scripts/switch-theme.sh blackmetal` |
 
 Switching a theme applies, live:
@@ -158,13 +161,13 @@ Switching a theme applies, live:
 - the Waybar palette: `colors.css` is copied in, and the inline `<span>` colours of `config.jsonc` are rewritten to the theme's `accent` / `muted` (Waybar restart),
 - the Kitty colours (`SIGUSR1`, so open terminals update too),
 - the Hyprlock background,
-- the Neovim colorscheme in `~/.config/nvim/lua/plugins/colorscheme.lua`, if you have one (`catppuccin-mocha`, `gruvbox`, `tokyonight`, `carbonfox`).
+- the NvChad base46 theme in `neovim/nvim/lua/chadrc.lua` (`catppuccin`, `chocolate` for Gruvbox, `kanagawa-dragon` for Kanagawa, `yoru` for Black Metal), recompiled for new `nvim` instances and reloaded live in the ones already open.
 
 ### Adding your own theme
 
 1. Create `hypr/themes/<name>/` with `lookandfeel.lua`, `hyprlock.conf`, `kitty.conf` and `hyprpaper.conf`.
 2. Create `waybar/themes/<name>/colors.css` defining the five colours `bg`, `fg`, `accent`, `alert` and `muted` (`@define-color accent #rrggbb;` — keep 6-digit hex, the script parses it).
-3. Add `<name>` to `VALID_THEMES` in `hypr/scripts/switch-theme.sh` (and a Neovim case if you want one), and optionally a `SUPER + ALT + n` bind in `hypr/hyprconf/keybindings.lua`.
+3. Add `<name>` to `VALID_THEMES` in `hypr/scripts/switch-theme.sh` (and a NvChad theme in its `case` if you want one — `<leader>th` in Neovim lists the names), and optionally a `SUPER + ALT + n` bind in `hypr/hyprconf/keybindings.lua`.
 
 Wallpapers live in `hypr/wp/` — drop yours in and point the theme's `hyprpaper.conf` at it.
 
@@ -234,7 +237,7 @@ HiraDotfiles/
 │   │   ├── lookandfeel.lua    # gaps, blur, shadows, animations
 │   │   ├── permissions.lua    # Hyprland permission system
 │   │   └── workspaces.lua     # window & workspace rules
-│   ├── themes/                # catppuccin · gruvbox · tokyonight · blackmetal
+│   ├── themes/                # catppuccin · gruvbox · kanagawa · blackmetal
 │   ├── scripts/switch-theme.sh
 │   ├── hyprlock.conf
 │   ├── hyprpaper.conf
@@ -247,12 +250,16 @@ HiraDotfiles/
 ├── rofi/                      # launchers, power menus, applets, 16 colorschemes
 ├── kitty/kitty.conf
 ├── wlogout/
+├── neovim/
+│   ├── nvim/                  # NvChad config, linked as ~/.config/nvim
+│   │   └── lua/chadrc.lua     # base46 theme (rewritten on theme switch), dashboard
+│   └── backup/lazyvim/        # previous LazyVim config, kept for reference
 ├── sddm/                      # optional login screen (own install.sh)
 └── install.sh
 ```
 
 > [!NOTE]
-> `waybar/colors.css`, `hypr/hyprconf/lookandfeel.lua`, `hypr/hyprlock.conf` and `kitty/kitty.conf` are **overwritten** by `switch-theme.sh` — edit the copies in `hypr/themes/` and `waybar/themes/` instead. `waybar/config.jsonc` and `waybar/style.css` are safe to edit, but hard-coded `foreground='…'` / `fgcolor='…'` colours in `config.jsonc` get replaced on each switch.
+> `waybar/colors.css`, `hypr/hyprconf/lookandfeel.lua`, `hypr/hyprlock.conf` and `kitty/kitty.conf` are **overwritten** (and the `theme` line of `neovim/nvim/lua/chadrc.lua` rewritten) by `switch-theme.sh` — edit the copies in `hypr/themes/` and `waybar/themes/` instead. `waybar/config.jsonc` and `waybar/style.css` are safe to edit, but hard-coded `foreground='…'` / `fgcolor='…'` colours in `config.jsonc` get replaced on each switch.
 
 ---
 
@@ -261,7 +268,7 @@ HiraDotfiles/
 - Rofi themes, launchers and applets by [Aditya Shakya (@adi1090x)](https://github.com/adi1090x/rofi).
 - Waybar layout based on [HANCORE-linux/waybar-themes](https://github.com/HANCORE-linux/waybar-themes) (V7.2a).
 - SDDM theme: [Sugar Candy](https://framagit.org/MarianArlt/sddm-sugar-candy) by Marian Arlt.
-- Colour schemes: [Catppuccin](https://github.com/catppuccin), [Gruvbox](https://github.com/morhetz/gruvbox), [Tokyo Night](https://github.com/folke/tokyonight.nvim), Black Metal (from [base16](https://github.com/tinted-theming/schemes)).
+- Colour schemes: [Catppuccin](https://github.com/catppuccin), [Gruvbox](https://github.com/morhetz/gruvbox), [Kanagawa](https://github.com/rebelot/kanagawa.nvim), Black Metal (from [base16](https://github.com/tinted-theming/schemes)).
 - Built on [Hyprland](https://hypr.land) and its ecosystem.
 
 ---

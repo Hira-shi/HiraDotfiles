@@ -49,7 +49,9 @@ install_required_packages() {
   local runner
   runner="$(ensure_privilege_cmd)"
 
-  local pkgs=(hyprland kitty rofi waybar wlogout pavucontrol pamixer)
+  # neovim + what NvChad needs (git for lazy.nvim, ripgrep for Telescope,
+  # gcc/make/tree-sitter-cli for Treesitter parsers, unzip for Mason)
+  local pkgs=(hyprland kitty rofi waybar wlogout pavucontrol pamixer neovim git ripgrep gcc make tree-sitter-cli unzip)
 
   if command -v pacman >/dev/null 2>&1; then
     local pkg
@@ -126,20 +128,51 @@ link_dir() {
   echo "Linked $dst -> $src"
 }
 
-link_repo_configs() {
-  local src
-  for src in "$ROOT"/*; do
-    [ -e "$src" ] || continue
+# Repo directory -> name in ~/.config
+CONFIGS=(
+  "hypr:hypr"
+  "waybar:waybar"
+  "rofi:rofi"
+  "kitty:kitty"
+  "wlogout:wlogout"
+  "neovim/nvim:nvim"
+)
 
-    case "$(basename -- "$src")" in
-    install.sh | README.md | sddm)
-      continue
-      ;;
+# An existing Neovim config (e.g. LazyVim) leaves plugins, Mason packages and
+# state behind that clash with NvChad: back them up with the config.
+backup_nvim_data() {
+  local dst="$CONFIG_DIR/nvim"
+  local dir
+
+  # Already pointing into this repo (even an older layout): nothing to migrate
+  if [ -L "$dst" ]; then
+    case "$(readlink -f -- "$dst")" in
+    "$ROOT"/*) return ;;
     esac
+  fi
+  [ -e "$dst" ] || [ -L "$dst" ] || return 0
 
-    if [ -d "$src" ]; then
-      link_dir "$src" "$CONFIG_DIR/$(basename -- "$src")"
+  for dir in "$HOME/.local/share/nvim" "$HOME/.local/state/nvim" "$HOME/.cache/nvim"; do
+    if [ -e "$dir" ]; then
+      echo "Backing up existing $dir"
+      backup_path "$dir"
     fi
+  done
+}
+
+link_repo_configs() {
+  local entry src dst
+  for entry in "${CONFIGS[@]}"; do
+    src="$ROOT/${entry%%:*}"
+    dst="$CONFIG_DIR/${entry##*:}"
+
+    [ -d "$src" ] || continue
+
+    if [ "${entry##*:}" = "nvim" ]; then
+      backup_nvim_data
+    fi
+
+    link_dir "$src" "$dst"
   done
 }
 

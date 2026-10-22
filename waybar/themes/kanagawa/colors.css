@@ -1,0 +1,6 @@
+/* Palette Waybar du thème kanagawa (copiée dans waybar/colors.css par switch-theme.sh) */
+@define-color bg #181616;
+@define-color fg #c5c9c5;
+@define-color accent #8ba4b0;
+@define-color alert #c4746e;
+@define-color muted #737c73;
