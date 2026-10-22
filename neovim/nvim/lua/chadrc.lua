@@ -7,7 +7,7 @@ local M = {}
 
 M.base46 = {
   -- rewritten by hypr/scripts/switch-theme.sh (catppuccin, chocolate, kanagawa-dragon, yoru)
-  theme = "catppuccin",
+  theme = "yoru",
   -- let kitty's background (and its opacity) show through
   transparency = true,
 
