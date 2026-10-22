@@ -96,7 +96,7 @@
   },
   "cpu": {
     "interval": 5,
-    "format": "<span foreground='#974b46'>cpu</span> {usage:02}%",
+    "format": "<span foreground='#89b4fa'>cpu</span> {usage:02}%",
     "on-click": "kitty -e top",
     "states": {
       "warning": 50,
@@ -105,7 +105,7 @@
   },
   "memory": {
     "interval": 5,
-    "format": "<span foreground='#974b46'>mem</span> {percentage:02}%",
+    "format": "<span foreground='#89b4fa'>mem</span> {percentage:02}%",
     "tooltip-format": "Used {percentage}%\n{used:0.1f}GB/{total:0.1f}GB",
     "on-click": "kitty -e top",
     "states": {
@@ -125,7 +125,7 @@
     "on-scroll-up": "brightnessctl s +5%"
   },
   "clock": {
-    "format": "<span foreground='#974b46'>{0:%H:%M}</span> <span size='small' fgcolor='#505050'><i>{0:%a, %b %d}</i></span>",
+    "format": "<span foreground='#89b4fa'>{0:%H:%M}</span> <span size='small' fgcolor='#6c7086'><i>{0:%a, %b %d}</i></span>",
     "format-alt": "{:L%d %B W%V %Y}",
     "tooltip-format": "<span>{calendar}</span>",
     "calendar": {
@@ -134,16 +134,16 @@
       "on-click-right": "mode",
       "format": {
         "month": "<b>{}</b>",
-        "weekdays": "<span fgcolor='#505050'><b>{}</b></span>",
-        "today": "<span foreground='#974b46'><b>{}</b></span>"
+        "weekdays": "<span fgcolor='#6c7086'><b>{}</b></span>",
+        "today": "<span foreground='#89b4fa'><b>{}</b></span>"
       }
     }
   },
   "network": {
-    "format": "<span foreground='#974b46'>net</span> on",
-    "format-wifi": "<span foreground='#974b46'>wifi</span> {essid}",
-    "format-ethernet": "<span foreground='#974b46'>eth</span> on",
-    "format-disconnected": "<span foreground='#974b46'>net</span> off",
+    "format": "<span foreground='#89b4fa'>net</span> on",
+    "format-wifi": "<span foreground='#89b4fa'>wifi</span> {essid}",
+    "format-ethernet": "<span foreground='#89b4fa'>eth</span> on",
+    "format-disconnected": "<span foreground='#89b4fa'>net</span> off",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
@@ -178,8 +178,8 @@
     "on-click": "blueman-manager"
   },
   "pulseaudio#input": {
-    "format": "<span foreground='#974b46'>mic</span> {source_volume}%",
-    "format-muted": "<span foreground='#974b46'>mic</span> muted",
+    "format": "<span foreground='#89b4fa'>mic</span> {source_volume}%",
+    "format-muted": "<span foreground='#89b4fa'>mic</span> muted",
     "tooltip-format": "mic {source_volume}%",
     "scroll-step": 1,
     "smooth-scrolling-threshold": 1,
@@ -190,8 +190,8 @@
     "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%"
   },
   "pulseaudio#output": {
-    "format": "<span foreground='#974b46'>vol</span> {volume}%",
-    "format-muted": "<span foreground='#974b46'>vol</span> muted",
+    "format": "<span foreground='#89b4fa'>vol</span> {volume}%",
+    "format-muted": "<span foreground='#89b4fa'>vol</span> muted",
     "tooltip-format": "vol {volume}%",
     "max-volume": 100,
     "scroll-step": 2,
@@ -201,7 +201,7 @@
   },
   "mpris": {
     "format": "{dynamic}",
-    "format-paused": "<span foreground='#974b46'>paused</span> {dynamic}",
+    "format-paused": "<span foreground='#89b4fa'>paused</span> {dynamic}",
     "interval": 5,
     "dynamic-order": ["artist", "position", "length"],
     "dynamic-importance-order": ["position", "length", "artist"],
